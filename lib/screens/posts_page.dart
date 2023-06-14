@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:hackman/screens/new_post.dart';
 import 'package:hackman/services/apis/api_handler.dart';
 import 'package:hackman/utils/posts_card.dart';
 
@@ -13,9 +15,13 @@ class PostPage extends StatefulWidget {
 
 class _PostPageState extends State<PostPage> {
   List<Post> posts = [];
+  bool present = false;
 
   void getPosts() async {
     posts = await Api_Handler.getPosts();
+    setState(() {
+      present = true;
+    });
     print(posts);
   }
 
@@ -42,25 +48,43 @@ class _PostPageState extends State<PostPage> {
           Icon(Icons.message_outlined),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Expanded(
-                child: ListView.builder(
-              itemCount: posts.length,
-              itemBuilder: (context, index) {
-                return RedditPostWidget(
-                  title: posts[index].title!,
-                  author: posts[index].name!,
-                  description: posts[index].description!,
-                  time: posts[index].time!,
-                );
-              },
-            )),
-          ],
+      floatingActionButtonLocation:
+          FloatingActionButtonLocation.miniCenterDocked,
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => const NewPostPage(),
+          ),
+        ),
+        child: const Icon(
+          IconlyBold.plus,
+          size: 40,
         ),
       ),
+      body: (present)
+          ? Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: posts.length,
+                      itemBuilder: (context, index) {
+                        return RedditPostWidget(
+                          title: posts[index].title!,
+                          author: posts[index].name!,
+                          description: posts[index].description!,
+                          time: posts[index].time!,
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            )
+          : const Center(
+              child: CircularProgressIndicator(),
+            ),
     );
   }
 }
