@@ -19,7 +19,7 @@ class _PostPageState extends State<PostPage> {
   bool present = false;
 
   void getPosts() async {
-    posts = await Api_Handler.getPosts();
+    posts = await ApiHandler.getPosts();
     setState(() {
       present = true;
     });
@@ -77,24 +77,29 @@ class _PostPageState extends State<PostPage> {
         ),
       ),
       body: (present)
-          ? Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: posts.length,
-                      itemBuilder: (context, index) {
-                        return RedditPostWidget(
-                          title: posts[index].title!,
-                          author: posts[index].name!,
-                          description: posts[index].description!,
-                          time: posts[index].time!,
-                        );
-                      },
+          ? RefreshIndicator(
+              onRefresh: () async {
+                getPosts();
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: posts.length,
+                        itemBuilder: (context, index) {
+                          return RedditPostWidget(
+                            title: posts[index].title!,
+                            author: posts[index].name!,
+                            description: posts[index].description!,
+                            time: posts[index].time!,
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             )
           : const Center(

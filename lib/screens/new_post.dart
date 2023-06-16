@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hackman/services/apis/api_handler.dart';
 
 class NewPostPage extends StatefulWidget {
   const NewPostPage({super.key});
@@ -18,6 +20,12 @@ class _NewPostPageState extends State<NewPostPage> {
     super.dispose();
   }
 
+  void submit(String name, String title, String description) async {
+    ApiHandler.submitPost(name, title, description);
+  }
+
+  var user = FirebaseAuth.instance.currentUser;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,6 +37,21 @@ class _NewPostPageState extends State<NewPostPage> {
             size: 25,
           ),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GestureDetector(
+              onTap: () {
+                submit(
+                    user!.displayName.toString(),
+                    titleController.text.toString(),
+                    descriptionController.text.toString());
+                Navigator.of(context).pop();
+              },
+              child: const Text('Post'),
+            ),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(15, 3, 15, 20),
