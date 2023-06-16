@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../resources/auth_method.dart';
+import 'package:hackman/services/auth/auth_services.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -10,7 +9,6 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  final AuthMethod _authMethods = AuthMethod();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,12 +17,7 @@ class _SignInPageState extends State<SignInPage> {
         children: [
           Center(
             child: ElevatedButton(
-              onPressed: () async {
-                bool res = await _authMethods.signInWithGoogle(context);
-                if (res) {
-                  Navigator.pushNamed(context, '/posts');
-                }
-              },
+              onPressed: () => AuthServices().signInWithGoogle(),
               child: const Text("Google Sign In"),
             ),
           ),

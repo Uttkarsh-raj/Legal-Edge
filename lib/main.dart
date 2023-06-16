@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:hackman/screens/main_page.dart';
 import 'package:hackman/screens/posts_page.dart';
-import 'package:hackman/screens/sign_in.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "/posts": (context) => const PostPage(),
       },
-      home: const SignInPage(),
+      home: const MainPage(),
     );
   }
 }
