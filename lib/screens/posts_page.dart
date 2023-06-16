@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:hackman/screens/new_post.dart';
@@ -22,7 +23,6 @@ class _PostPageState extends State<PostPage> {
     setState(() {
       present = true;
     });
-    print(posts);
   }
 
   @override
@@ -33,8 +33,23 @@ class _PostPageState extends State<PostPage> {
 
   @override
   Widget build(BuildContext context) {
+    void logOut() {
+      FirebaseAuth.instance.signOut();
+    }
+
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GestureDetector(
+              onTap: logOut,
+              child: const Icon(
+                IconlyBold.logout,
+              ),
+            ),
+          ),
+        ],
         elevation: 5,
         leading: const CircleAvatar(
           backgroundImage: AssetImage('asset/images/avatar3.png'),
