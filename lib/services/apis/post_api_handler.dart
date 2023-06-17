@@ -5,8 +5,8 @@ import 'package:http/http.dart' as http;
 
 import '../models/post_model.dart';
 
-class ApiHandler {
-  static Future<List<dynamic>> getData() async {
+class PostApiHandler {
+  static Future<List<dynamic>> getPostsData() async {
     try {
       var uri = Uri.parse("https://hkmn-api.onrender.com/posts");
       var res = await http.get(uri);
@@ -26,7 +26,7 @@ class ApiHandler {
   }
 
   static Future<List<Post>> getPosts() async {
-    List temp = await getData();
+    List temp = await getPostsData();
     return Post.postFromSnapshot(temp);
   }
 

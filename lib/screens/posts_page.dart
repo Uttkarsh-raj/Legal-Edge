@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:hackman/screens/new_post.dart';
-import 'package:hackman/services/apis/api_handler.dart';
+import 'package:hackman/services/apis/post_api_handler.dart';
 import 'package:hackman/utils/posts_card.dart';
 
 import '../services/models/post_model.dart';
@@ -19,7 +19,7 @@ class _PostPageState extends State<PostPage> {
   bool present = false;
 
   void getPosts() async {
-    posts = await ApiHandler.getPosts();
+    posts = await PostApiHandler.getPosts();
     setState(() {
       present = true;
     });

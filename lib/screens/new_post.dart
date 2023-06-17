@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:hackman/services/apis/api_handler.dart';
+import 'package:hackman/services/apis/post_api_handler.dart';
 
 class NewPostPage extends StatefulWidget {
   const NewPostPage({super.key});
@@ -21,7 +21,7 @@ class _NewPostPageState extends State<NewPostPage> {
   }
 
   void submit(String name, String title, String description) async {
-    ApiHandler.submitPost(name, title, description);
+    PostApiHandler.submitPost(name, title, description);
   }
 
   var user = FirebaseAuth.instance.currentUser;

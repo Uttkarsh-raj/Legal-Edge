@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hackman/services/apis/user_api_handler.dart';
 import 'package:hackman/services/auth/auth_services.dart';
 
 class SignInPage extends StatefulWidget {
@@ -17,7 +19,19 @@ class _SignInPageState extends State<SignInPage> {
         children: [
           Center(
             child: ElevatedButton(
-              onPressed: () => AuthServices().signInWithGoogle(),
+              onPressed: () async {
+                UserCredential userCredential =
+                    await AuthServices().signInWithGoogle();
+                User user = userCredential.user!;
+                if (userCredential.additionalUserInfo!.isNewUser) {
+                  UserApiHandler.registerUser(
+                    user.displayName.toString().trim(),
+                    user.email.toString().trim(),
+                    int.parse(user.phoneNumber.toString().trim()),
+                    user.photoURL.toString().trim(),
+                  );
+                }
+              },
               child: const Text("Google Sign In"),
             ),
           ),
