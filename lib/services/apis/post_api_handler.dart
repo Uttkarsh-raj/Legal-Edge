@@ -31,7 +31,7 @@ class PostApiHandler {
   }
 
   static Future submitPost(String name, String title, String descrition) async {
-    var response = await http.post(
+    await http.post(
       Uri.parse('https://hkmn-api.onrender.com/submit'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',

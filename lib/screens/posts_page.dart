@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hackman/screens/new_post.dart';
 import 'package:hackman/services/apis/post_api_handler.dart';
 import 'package:hackman/utils/posts_card.dart';
@@ -33,8 +34,9 @@ class _PostPageState extends State<PostPage> {
 
   @override
   Widget build(BuildContext context) {
-    void logOut() {
-      FirebaseAuth.instance.signOut();
+    void logOut() async {
+      await GoogleSignIn().signOut();
+      await FirebaseAuth.instance.signOut();
     }
 
     return Scaffold(
