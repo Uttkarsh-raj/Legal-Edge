@@ -18,6 +18,7 @@ class PostPage extends StatefulWidget {
 class _PostPageState extends State<PostPage> {
   List<Post> posts = [];
   bool present = false;
+  String? profilPic = FirebaseAuth.instance.currentUser?.photoURL;
 
   void getPosts() async {
     posts = await PostApiHandler.getPosts();
@@ -53,8 +54,11 @@ class _PostPageState extends State<PostPage> {
           ),
         ],
         elevation: 5,
-        leading: const CircleAvatar(
-          backgroundImage: AssetImage('asset/images/avatar3.png'),
+        leading: CircleAvatar(
+          child: CircleAvatar(
+            backgroundImage: NetworkImage(profilPic ??
+                'https://cdn.icon-icons.com/icons2/2468/PNG/512/user_kids_avatar_user_profile_icon_149314.png'),
+          ),
         ),
         centerTitle: true,
         title: const Text('Posts: '),

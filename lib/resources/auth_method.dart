@@ -31,6 +31,7 @@ class AuthMethod {
             'userName': user.displayName,
             'uid': user.uid,
             'profilePhoto': user.photoURL,
+            'contact': user.phoneNumber,
           });
         }
         res = true;

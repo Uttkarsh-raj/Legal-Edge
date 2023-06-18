@@ -30,24 +30,50 @@ class _SignInPageState extends State<SignInPage> {
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text(
-              'Welcome!!',
-              style: TextStyle(
-                color: AppColorsConstants.secondaryPurpleColor,
-                fontSize: 25,
-                fontWeight: FontWeight.w700,
-                letterSpacing: 0.4,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: RichText(
+              text: const TextSpan(
+                style: TextStyle(
+                  color: AppColorsConstants.secondaryPurpleColor,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 0.4,
+                ),
+                children: <TextSpan>[
+                  TextSpan(
+                    text: 'Welcome to',
+                  ),
+                  TextSpan(
+                    text: ' LegalEdge,',
+                    style: TextStyle(
+                      color: AppColorsConstants.secondaryPurpleColor,
+                      fontSize: 25,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 0.4,
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.all(8.0),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(8.0, 3, 8, 3),
             child: Text(
-              'Sign In to continue...',
+              'Unlock legal expertise at your fingertips',
               style: TextStyle(
-                color: AppColorsConstants.tertiaryBlackColor,
+                color: AppColorsConstants.secondaryPurpleColor.withOpacity(0.7),
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'Sign In to continue ...',
+              style: TextStyle(
+                color: AppColorsConstants.tertiaryBlackColor.withOpacity(0.8),
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
               ),
@@ -68,7 +94,7 @@ class _SignInPageState extends State<SignInPage> {
                     UserApiHandler.registerUser(
                       user.displayName.toString().trim(),
                       user.email.toString().trim(),
-                      int.parse(user.phoneNumber.toString().trim()),
+                      user.phoneNumber.toString().trim(),
                       user.photoURL.toString().trim(),
                     );
                   }
@@ -99,7 +125,7 @@ class _SignInPageState extends State<SignInPage> {
                   AppColorsConstants.secondaryPurpleColor.withOpacity(0.3),
                   AppColorsConstants.secondaryPurpleColor.withOpacity(0.2),
                 ],
-                durations: [7400, 6200, 4800, 3700],
+                durations: [7400, 5800, 4800, 3700],
                 heightPercentages: [0.55, 0.37, 0.22, 0.1],
               ),
               size: Size(double.infinity, size.height * 0.55),

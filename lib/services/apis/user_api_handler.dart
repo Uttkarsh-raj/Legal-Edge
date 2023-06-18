@@ -45,7 +45,7 @@ class UserApiHandler {
   }
 
   static Future registerUser(
-      String name, String email, int number, String profilePicUrl) async {
+      String name, String email, String number, String profilePicUrl) async {
     await http.post(
       Uri.parse('https://hkmn-dev-new.onrender.com/api/v1/user/register'),
       headers: <String, String>{
