@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:hackman/app_consts/app_colors.dart';
 import 'package:hackman/screens/main_page.dart';
 import 'package:hackman/screens/posts_page.dart';
 
@@ -25,8 +26,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+        appBarTheme: AppBarTheme(
+          backgroundColor:
+              AppColorsConstants.primaryBackgroundColor.withOpacity(0.2),
+        ),
       ),
       routes: {
         "/posts": (context) => const PostPage(),

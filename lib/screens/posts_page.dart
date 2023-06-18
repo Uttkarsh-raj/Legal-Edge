@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hackman/screens/new_post.dart';
+import 'package:hackman/screens/profile_page.dart';
 import 'package:hackman/services/apis/post_api_handler.dart';
 import 'package:hackman/utils/posts_card.dart';
 
+import '../app_consts/app_colors.dart';
 import '../services/models/post_model.dart';
 
 class PostPage extends StatefulWidget {
@@ -35,33 +37,35 @@ class _PostPageState extends State<PostPage> {
 
   @override
   Widget build(BuildContext context) {
-    void logOut() async {
-      await GoogleSignIn().signOut();
-      await FirebaseAuth.instance.signOut();
-    }
+    Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: AppBar(
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GestureDetector(
-              onTap: logOut,
-              child: const Icon(
-                IconlyBold.logout,
-              ),
-            ),
-          ),
-        ],
+        toolbarHeight: size.height * 0.072,
+        backgroundColor: AppColorsConstants.primaryBackgroundColor,
         elevation: 5,
-        leading: CircleAvatar(
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => const ProfilePage(),
+            ));
+          },
           child: CircleAvatar(
-            backgroundImage: NetworkImage(profilPic ??
-                'https://cdn.icon-icons.com/icons2/2468/PNG/512/user_kids_avatar_user_profile_icon_149314.png'),
+            child: CircleAvatar(
+              backgroundImage: NetworkImage(profilPic ??
+                  'https://cdn.icon-icons.com/icons2/2468/PNG/512/user_kids_avatar_user_profile_icon_149314.png'),
+            ),
           ),
         ),
         centerTitle: true,
-        title: const Text('Posts: '),
+        title: const Text(
+          'LegalEdge',
+          style: TextStyle(
+            color: AppColorsConstants.tertiaryBlackColor,
+            fontSize: 21,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
       ),
       bottomNavigationBar: NavigationBar(
         destinations: const [
