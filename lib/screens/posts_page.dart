@@ -22,7 +22,7 @@ class _PostPageState extends State<PostPage> {
   void getPosts() async {
     posts = await PostApiHandler.getPosts();
     setState(() {
-      present = true;
+      if (posts.isNotEmpty) present = true;
     });
   }
 

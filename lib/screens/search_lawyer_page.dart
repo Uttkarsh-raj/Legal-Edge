@@ -4,6 +4,7 @@ import 'package:hackman/services/models/lawyer_model.dart';
 import 'package:hackman/utils/input_field.dart';
 
 import '../app_consts/app_colors.dart';
+import '../utils/list_tile.dart';
 
 class SearchLawyerPage extends StatefulWidget {
   const SearchLawyerPage({super.key});
@@ -15,6 +16,7 @@ class SearchLawyerPage extends StatefulWidget {
 class _SearchLawyerPageState extends State<SearchLawyerPage> {
   TextEditingController searchController = TextEditingController();
   List<Lawyer> lawyers = [];
+  bool present = false;
 
   @override
   void dispose() {
@@ -24,6 +26,9 @@ class _SearchLawyerPageState extends State<SearchLawyerPage> {
 
   void getLawyers() async {
     lawyers = await LawyerApiHandler.getLawyers();
+    setState(() {
+      if (lawyers.isNotEmpty) present = true;
+    });
   }
 
   @override
@@ -68,14 +73,23 @@ class _SearchLawyerPageState extends State<SearchLawyerPage> {
               ],
             ),
             const SizedBox(height: 10),
-            Expanded(
-              child: ListView.builder(
-                itemCount: lawyers.length,
-                itemBuilder: (context, index) {
-                  return Text(lawyers[index].name!);
-                },
-              ),
-            ),
+            (present)
+                ? Expanded(
+                    child: ListView.builder(
+                      itemCount: lawyers.length,
+                      itemBuilder: (context, index) {
+                        return CustomListTile(
+                          title: lawyers[index].name!,
+                          email: lawyers[index].email!,
+                          photoUrl: lawyers[index].profilePic,
+                        );
+                        // return Text(lawyers[index].name!);
+                      },
+                    ),
+                  )
+                : const Center(
+                    child: CircularProgressIndicator(),
+                  ),
           ],
         ),
       ),
