@@ -60,7 +60,7 @@ class _SignInPageState extends State<SignInPage> {
           Padding(
             padding: const EdgeInsets.fromLTRB(8.0, 3, 8, 3),
             child: Text(
-              'Unlock legal expertise at your fingertips',
+              'Unlock legal advice at your fingertips',
               style: TextStyle(
                 color: AppColorsConstants.secondaryPurpleColor.withOpacity(0.7),
                 fontSize: 13,

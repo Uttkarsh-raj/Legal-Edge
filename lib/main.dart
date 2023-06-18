@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hackman/app_consts/app_colors.dart';
-import 'package:hackman/screens/main_page.dart';
+import 'package:hackman/screens/main_auth_page.dart';
 import 'package:hackman/screens/posts_page.dart';
 
 void main() async {
@@ -26,6 +26,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
+        // colorScheme: ColorScheme.fromSeed(
+        //   seedColor: Colors.deepPurple.withOpacity(0.2),
+        //   primary: AppColorsConstants.primaryBackgroundColor,
+        //   background: AppColorsConstants.primaryBackgroundColor,
+        // ),
         useMaterial3: true,
         appBarTheme: AppBarTheme(
           backgroundColor:
@@ -35,7 +40,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "/posts": (context) => const PostPage(),
       },
-      home: const MainPage(),
+      home: const MainAuthPage(),
     );
   }
 }
