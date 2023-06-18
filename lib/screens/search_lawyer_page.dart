@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hackman/services/apis/lawyer_api_handler.dart';
+import 'package:hackman/services/models/lawyer_model.dart';
 import 'package:hackman/utils/input_field.dart';
 
 import '../app_consts/app_colors.dart';
@@ -12,11 +14,22 @@ class SearchLawyerPage extends StatefulWidget {
 
 class _SearchLawyerPageState extends State<SearchLawyerPage> {
   TextEditingController searchController = TextEditingController();
+  List<Lawyer> lawyers = [];
 
   @override
   void dispose() {
     searchController.dispose();
     super.dispose();
+  }
+
+  void getLawyers() async {
+    lawyers = await LawyerApiHandler.getLawyers();
+  }
+
+  @override
+  void initState() {
+    getLawyers();
+    super.initState();
   }
 
   @override
@@ -40,9 +53,12 @@ class _SearchLawyerPageState extends State<SearchLawyerPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                InputField(
-                  controller: searchController,
-                  hinttext: 'Search',
+                GestureDetector(
+                  onTap: getLawyers,
+                  child: InputField(
+                    controller: searchController,
+                    hinttext: 'Search',
+                  ),
                 ),
                 Icon(
                   Icons.search_outlined,
@@ -52,6 +68,14 @@ class _SearchLawyerPageState extends State<SearchLawyerPage> {
               ],
             ),
             const SizedBox(height: 10),
+            Expanded(
+              child: ListView.builder(
+                itemCount: lawyers.length,
+                itemBuilder: (context, index) {
+                  return Text(lawyers[index].name!);
+                },
+              ),
+            ),
           ],
         ),
       ),

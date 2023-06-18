@@ -24,7 +24,7 @@ class UserApiHandler {
     }
   }
 
-  static Future<dynamic> getUser(String id) async {
+  static Future<dynamic> getUser(String? id) async {
     try {
       var uri = Uri.parse('https://hkmn-dev-new.onrender.com/api/v1/user/$id');
       var res = await http.get(uri);
