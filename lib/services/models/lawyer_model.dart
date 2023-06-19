@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Lawyer {
   String? profilePic;
   String? uid;
@@ -6,8 +8,8 @@ class Lawyer {
   String? address;
   String? city;
   String? regNo;
-  // List<String?>? cases;
-  // List<String?>? courts;
+  List<String?>? cases;
+  List<String?>? courts;
   String? contact;
   String? discription;
   Lawyer({
@@ -17,8 +19,8 @@ class Lawyer {
     this.address,
     this.city,
     this.regNo,
-    // this.cases,
-    // this.courts,
+    this.cases,
+    this.courts,
     this.contact,
     this.discription,
   });
@@ -31,8 +33,8 @@ class Lawyer {
     String? address,
     String? city,
     String? regNo,
-    // List<String?>? cases,
-    // List<String?>? courts,
+    List<String?>? cases,
+    List<String?>? courts,
     String? contact,
     String? discription,
   }) {
@@ -59,8 +61,8 @@ class Lawyer {
       'address': address,
       'city': city,
       'regNo': regNo,
-      // 'cases': cases,
-      // 'courts': courts,
+      'cases': cases,
+      'courts': courts,
       'contact': contact,
       'discription': discription,
     };
@@ -92,8 +94,8 @@ class Lawyer {
     address = json['address'];
     city = json['city'];
     regNo = json['regNo'];
-    // cases = (jsonDecode(json['cases']) as List<dynamic>).cast<String>();
-    // courts = (jsonDecode(json['courts']) as List<dynamic>).cast<String>();
+    cases = List<String>.from(json['cases']);
+    courts = List<String>.from(json['courts']);
     discription = json['discription'];
   }
 
@@ -106,8 +108,8 @@ class Lawyer {
     data['address'] = address;
     data['city'] = city;
     data['regNo'] = regNo;
-    // data['cases'] = json.encode(cases);
-    // data['courts'] = json.encode(courts);
+    data['cases'] = json.encode(cases);
+    data['courts'] = json.encode(courts);
     data['discription'] = discription;
     return data;
   }
