@@ -1,7 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hackman/app_consts/app_constants.dart';
-import 'package:hackman/screens/chat_page.dart';
+import 'package:hackman/screens/lawyers_profile.dart';
 
 import '../services/models/lawyer_model.dart';
 
@@ -21,23 +20,13 @@ class CustomListTile extends StatefulWidget {
 }
 
 class _CustomListTileState extends State<CustomListTile> {
-  User user = FirebaseAuth.instance.currentUser!;
-  String chatRoomId(String user1, String user2) {
-    if (user1[0].toLowerCase().codeUnits[0] >
-        user2.toLowerCase().codeUnits[0]) {
-      return "$user1$user2";
-    } else {
-      return "$user2$user1";
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
       child: Container(
-        height: size.height * 0.083,
+        // height: size.height * 0.117,
         // width: size.width * 0.9,
         decoration: BoxDecoration(
           color: Colors.white70,
@@ -55,50 +44,104 @@ class _CustomListTileState extends State<CustomListTile> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              Row(
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      print(
-                          "go to the lawyers profile page but currently to chat");
-                      String roomId =
-                          chatRoomId(user.displayName!, widget.lawyer.name!);
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => ChatPage(
-                            chatRoomId: roomId,
-                            lawyer: widget.lawyer,
-                          ),
-                        ),
-                      );
-                    },
-                    child: CircleAvatar(
+              GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => LawyersProfile(
+                        lawyer: widget.lawyer,
+                      ),
+                    ),
+                  );
+                },
+                child: Row(
+                  children: [
+                    CircleAvatar(
                       backgroundImage: NetworkImage(
                           widget.photoUrl ?? AppConstantsProfile.defaultAvatar),
                       radius: 23,
                     ),
+                    const SizedBox(width: 8.0),
+                    SizedBox(
+                      width: size.width * 0.7,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.title,
+                            style: const TextStyle(
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            widget.email,
+                            style: const TextStyle(
+                              fontSize: 12.0,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 8),
+              if (widget.lawyer.cases!.isNotEmpty)
+                const Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 5.0),
+                    child: Text(
+                      'Cases at:',
+                      style: TextStyle(
+                        fontSize: 13.0,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
                   ),
-                  const SizedBox(width: 8.0),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.title,
-                        style: const TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
+                ),
+              const SizedBox(height: 4),
+              SizedBox(
+                height: size.height * 0.0503,
+                // width: size.width * 0.66,
+                // color: Colors.red,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: widget.lawyer.cases!.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: Container(
+                        padding: const EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: Colors.white70,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.3),
+                              spreadRadius: 2,
+                              blurRadius: 4,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(5.0),
+                          child: Center(
+                              child: Text(
+                            widget.lawyer.cases![index]!,
+                            style: const TextStyle(
+                              fontSize: 12.0,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          )),
                         ),
                       ),
-                      Text(
-                        widget.email,
-                        style: const TextStyle(
-                          fontSize: 12.0,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+                    );
+                  },
+                ),
               ),
             ],
           ),
