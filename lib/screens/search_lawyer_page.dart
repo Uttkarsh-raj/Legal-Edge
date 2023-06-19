@@ -79,6 +79,7 @@ class _SearchLawyerPageState extends State<SearchLawyerPage> {
                       itemCount: lawyers.length,
                       itemBuilder: (context, index) {
                         return CustomListTile(
+                          lawyer: lawyers[index],
                           title: lawyers[index].name!,
                           email: lawyers[index].email!,
                           photoUrl: lawyers[index].profilePic,
