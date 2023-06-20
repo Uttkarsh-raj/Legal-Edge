@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:hackman/app_consts/app_colors.dart';
 
 class InputField extends StatelessWidget {
-  const InputField({super.key, required this.hinttext, this.controller});
+  const InputField(
+      {super.key, required this.hinttext, this.controller, this.focus});
   final String hinttext;
   final TextEditingController? controller;
+  final FocusNode? focus;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +32,7 @@ class InputField extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
                   child: TextField(
+                    focusNode: focus,
                     controller: controller,
                     decoration: InputDecoration(
                       hintText: hinttext,
