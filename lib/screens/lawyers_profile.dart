@@ -50,7 +50,7 @@ class _LawyersProfileState extends State<LawyersProfile> {
             const SizedBox(height: 12),
             Center(
               child: Container(
-                height: size.height * 0.42,
+                // height: size.height * 0.42,
                 width: size.width * 0.94,
                 decoration: BoxDecoration(
                   color: Colors.white70,
@@ -110,6 +110,19 @@ class _LawyersProfileState extends State<LawyersProfile> {
                           ),
                         ],
                       ),
+                      if (widget.lawyer.discription != null)
+                        const SizedBox(height: 10),
+                      if (widget.lawyer.discription != null)
+                        Text(
+                          '${widget.lawyer.discription}',
+                          style: TextStyle(
+                            color: AppColorsConstants.tertiaryBlackColor
+                                .withOpacity(0.7),
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
+                            letterSpacing: 0.05,
+                          ),
+                        ),
                       const SizedBox(height: 10),
                       const CustomDivider(),
                       const SizedBox(height: 10),

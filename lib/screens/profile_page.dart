@@ -17,7 +17,6 @@ class _ProfilePageState extends State<ProfilePage> {
   void logout() async {
     await GoogleSignIn().signOut();
     await FirebaseAuth.instance.signOut();
-    Navigator.of(context).pop();
   }
 
   @override

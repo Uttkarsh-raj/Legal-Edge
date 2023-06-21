@@ -65,12 +65,12 @@ class _ShowHorizontalListState extends State<ShowHorizontalList> {
                 ],
               ),
               child: Padding(
-                padding: const EdgeInsets.all(5.0),
+                padding: const EdgeInsets.all(4.0),
                 child: Center(
                     child: Text(
                   widget.list[index],
                   style: const TextStyle(
-                    fontSize: 12.0,
+                    fontSize: 11,
                     fontWeight: FontWeight.w400,
                   ),
                 )),

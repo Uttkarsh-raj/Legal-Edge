@@ -29,6 +29,8 @@ class MainAuthPage extends StatelessWidget {
   }
 }
 
+final User user = FirebaseAuth.instance.currentUser!;
+
 final screen = [
   const PostPage(),
   const ProfilePage(),
