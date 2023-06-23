@@ -31,6 +31,23 @@ class _SearchLawyerPageState extends State<SearchLawyerPage> {
     });
   }
 
+  void searchLawyers(String search) async {
+    setState(() {
+      lawyers.clear();
+    });
+    if (search.isNotEmpty) {
+      lawyers = await LawyerApiHandler.searchLawyers(search);
+      setState(() {
+        if (lawyers.isNotEmpty) present = true;
+      });
+    } else {
+      lawyers = await LawyerApiHandler.getLawyers();
+      setState(() {
+        if (lawyers.isNotEmpty) present = true;
+      });
+    }
+  }
+
   @override
   void initState() {
     getLawyers();
@@ -58,17 +75,19 @@ class _SearchLawyerPageState extends State<SearchLawyerPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                GestureDetector(
-                  onTap: getLawyers,
-                  child: InputField(
-                    controller: searchController,
-                    hinttext: 'Search',
-                  ),
+                InputField(
+                  controller: searchController,
+                  hinttext: 'Search',
                 ),
-                Icon(
-                  Icons.search_outlined,
-                  size: 30,
-                  color: AppColorsConstants.tertiaryBlackColor.withOpacity(0.7),
+                GestureDetector(
+                  onTap: () =>
+                      searchLawyers(searchController.text.toString().trim()),
+                  child: Icon(
+                    Icons.search_outlined,
+                    size: 30,
+                    color:
+                        AppColorsConstants.tertiaryBlackColor.withOpacity(0.7),
+                  ),
                 ),
               ],
             ),
