@@ -6,7 +6,6 @@ import 'package:hackman/screens/posts_page.dart';
 import 'package:hackman/screens/profile_page.dart';
 import 'package:hackman/screens/search_lawyer_page.dart';
 import 'package:hackman/screens/sign_in.dart';
-
 import 'new_post.dart';
 
 class MainAuthPage extends StatelessWidget {
@@ -34,6 +33,7 @@ final User user = FirebaseAuth.instance.currentUser!;
 final screen = [
   const PostPage(),
   const ProfilePage(),
+  // FormPage(user: user),
   const SearchLawyerPage(),
 ];
 

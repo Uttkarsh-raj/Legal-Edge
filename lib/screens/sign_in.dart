@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hackman/app_consts/app_colors.dart';
 import 'package:hackman/screens/form_page.dart';
-import 'package:hackman/services/apis/user_api_handler.dart';
 import 'package:hackman/services/auth/auth_services.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
@@ -92,12 +91,6 @@ class _SignInPageState extends State<SignInPage> {
                       await AuthServices().signInWithGoogle();
                   User user = userCredential.user!;
                   if (userCredential.additionalUserInfo!.isNewUser) {
-                    UserApiHandler.registerUser(
-                      user.displayName.toString().trim(),
-                      user.email.toString().trim(),
-                      user.phoneNumber.toString().trim(),
-                      user.photoURL.toString().trim(),
-                    );
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) => FormPage(user: user),

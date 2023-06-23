@@ -21,6 +21,7 @@ class _PostPageState extends State<PostPage> {
 
   void getPosts() async {
     posts = await PostApiHandler.getPosts();
+    print('new post: ${posts}');
     setState(() {
       if (posts.isNotEmpty) present = true;
     });
@@ -78,11 +79,12 @@ class _PostPageState extends State<PostPage> {
                         itemCount: posts.length,
                         itemBuilder: (context, index) {
                           return RedditPostWidget(
+                            profilePhoto: posts[index].profileP,
                             post: posts[index],
-                            title: posts[index].title!,
-                            author: posts[index].name!,
-                            description: posts[index].description!,
-                            time: posts[index].time!,
+                            title: posts[index].title ?? "",
+                            author: posts[index].name ?? "",
+                            description: posts[index].description ?? "",
+                            time: posts[index].time ?? "",
                           );
                         },
                       ),
@@ -91,8 +93,13 @@ class _PostPageState extends State<PostPage> {
                 ),
               ),
             )
-          : const Center(
-              child: CircularProgressIndicator(),
+          : RefreshIndicator(
+              onRefresh: () async {
+                getPosts();
+              },
+              child: const Center(
+                child: CircularProgressIndicator(),
+              ),
             ),
     );
   }

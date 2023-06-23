@@ -48,14 +48,13 @@ class UserApiHandler {
       String name, String email, String number, String profilePicUrl) async {
     await http.post(
       Uri.parse('https://hkmn-dev-new.onrender.com/api/v1/user/register'),
+      // Uri.parse('http://172.25.6.77:5000/api/V1/user/register'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(
         <String, dynamic>{
-          "avatar": {
-            "url": profilePicUrl,
-          },
+          "url": profilePicUrl,
           "name": name,
           "email": email,
           "contact": number,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:hackman/app_consts/app_constants.dart';
 
 import '../screens/post_page.dart';
 import '../services/models/post_model.dart';
@@ -10,6 +11,7 @@ class RedditPostWidget extends StatelessWidget {
   final String author;
   final String description;
   final String time;
+  final String? profilePhoto;
 
   const RedditPostWidget({
     super.key,
@@ -18,6 +20,7 @@ class RedditPostWidget extends StatelessWidget {
     required this.description,
     required this.time,
     required this.post,
+    required this.profilePhoto,
   });
 
   @override
@@ -53,9 +56,11 @@ class RedditPostWidget extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const CircleAvatar(
-                    backgroundImage: AssetImage('asset/images/avatar3.png'),
-                    radius: 23,
+                  CircleAvatar(
+                    backgroundImage: (profilePhoto != null)
+                        ? NetworkImage('$profilePhoto')
+                        : NetworkImage(AppConstantsProfile.defaultAvatar),
+                    radius: 22,
                   ),
                   const SizedBox(width: 8.0),
                   Column(
@@ -64,14 +69,14 @@ class RedditPostWidget extends StatelessWidget {
                       Text(
                         author,
                         style: const TextStyle(
-                          fontSize: 18.0,
+                          fontSize: 16.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
                         time,
                         style: const TextStyle(
-                          fontSize: 14.0,
+                          fontSize: 12.0,
                           color: Colors.grey,
                         ),
                       ),
@@ -85,7 +90,7 @@ class RedditPostWidget extends StatelessWidget {
                 child: Text(
                   title,
                   style: const TextStyle(
-                    fontSize: 22.0,
+                    fontSize: 20.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -95,9 +100,10 @@ class RedditPostWidget extends StatelessWidget {
                 child: Text(
                   description,
                   style: const TextStyle(
-                    fontSize: 16.0,
+                    fontSize: 14.0,
                     fontWeight: FontWeight.w400,
                   ),
+                  maxLines: 5,
                 ),
               ),
               const Padding(

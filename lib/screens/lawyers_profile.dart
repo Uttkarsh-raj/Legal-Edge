@@ -27,6 +27,12 @@ class _LawyersProfileState extends State<LawyersProfile> {
   }
 
   @override
+  void initState() {
+    print(widget.lawyer);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(

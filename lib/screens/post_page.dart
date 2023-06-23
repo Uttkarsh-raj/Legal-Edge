@@ -18,8 +18,8 @@ class _IndividualPostPageState extends State<IndividualPostPage> {
   TextEditingController comment = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    final FocusNode _focusNode = FocusNode();
+    // Size size = MediaQuery.of(context).size;
+    final FocusNode focusNode = FocusNode();
 
     return Scaffold(
       backgroundColor: AppColorsConstants.primaryBackgroundColor,
@@ -106,7 +106,7 @@ class _IndividualPostPageState extends State<IndividualPostPage> {
                     flex: 1,
                     child: IconButton(
                       icon: const Icon(Icons.comment),
-                      onPressed: () => _focusNode.requestFocus(),
+                      onPressed: () => focusNode.requestFocus(),
                     ),
                   ),
                   Flexible(
@@ -124,12 +124,12 @@ class _IndividualPostPageState extends State<IndividualPostPage> {
                 children: [
                   InputField(
                     hinttext: 'Comment here',
-                    focus: _focusNode,
+                    focus: focusNode,
                     controller: comment,
                   ),
                   const SizedBox(width: 10),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {}, //TODO: add comment feature post
                     child: const Icon(Icons.send),
                   ),
                 ],

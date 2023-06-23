@@ -20,8 +20,8 @@ class _NewPostPageState extends State<NewPostPage> {
     super.dispose();
   }
 
-  void submit(String name, String title, String description) async {
-    PostApiHandler.submitPost(name, title, description);
+  void submit(String email, String title, String description) async {
+    PostApiHandler.submitPost(email, title, description);
   }
 
   var user = FirebaseAuth.instance.currentUser;
@@ -43,7 +43,7 @@ class _NewPostPageState extends State<NewPostPage> {
             child: GestureDetector(
               onTap: () {
                 submit(
-                    user!.displayName.toString(),
+                    user!.email.toString().trim(),
                     titleController.text.toString(),
                     descriptionController.text.toString());
                 Navigator.of(context).pop();

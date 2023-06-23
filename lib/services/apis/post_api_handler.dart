@@ -8,14 +8,16 @@ import '../models/post_model.dart';
 class PostApiHandler {
   static Future<List<dynamic>> getPostsData() async {
     try {
-      var uri = Uri.parse("https://hkmn-api.onrender.com/posts");
+      var uri = Uri.parse("https://hkmn-dev-new.onrender.com/api/V1/posts");
+      // var uri = Uri.parse("http://172.25.6.77:5000/api/V1/posts");
       var res = await http.get(uri);
       var data = jsonDecode(res.body);
       List temp = [];
+      print('data: $data');
       if (res.statusCode != 200) {
         throw data["message"];
       }
-      for (var v in data) {
+      for (var v in data['posts']) {
         temp.add(v);
       }
       return temp;
@@ -30,17 +32,19 @@ class PostApiHandler {
     return Post.postFromSnapshot(temp);
   }
 
-  static Future submitPost(String name, String title, String descrition) async {
+  static Future submitPost(
+      String email, String title, String descrition) async {
     await http.post(
-      Uri.parse('https://hkmn-api.onrender.com/submit'),
+      Uri.parse('https://hkmn-dev-new.onrender.com/api/V1/post/create'),
+      // Uri.parse('http://172.25.6.77:5000/api/V1/post/create'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
       },
       body: jsonEncode(
         <String, String>{
-          'name': name,
           'title': title,
-          'description': descrition,
+          'userEmail': email,
+          'desc': descrition,
         },
       ),
     );

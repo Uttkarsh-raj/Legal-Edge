@@ -37,7 +37,7 @@ class _ChatPageState extends State<ChatPage> {
           .add(messages);
       message.clear();
     } else {
-      print("Enter some text: Snackbar");
+      // print("Enter some text: Snackbar"); TODO: Add Snackbar with proper text
     }
   }
 
