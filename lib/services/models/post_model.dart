@@ -1,15 +1,21 @@
 class Post {
   String? name;
+  String? email;
   String? id;
   String? title;
   String? description;
   String? time;
   String? profileP;
+  int? likes;
+  List<String?>? likedBy;
   Post({
     required this.name,
+    required this.email,
     required this.title,
     required this.description,
     required this.profileP,
+    required this.likes,
+    this.likedBy,
     this.id,
   });
   Post copyWith({
@@ -18,10 +24,12 @@ class Post {
     String? description,
   }) {
     return Post(
-      name: email ?? this.name,
+      name: name ?? this.name,
+      email: email ?? this.name,
       title: title ?? this.title,
       description: description ?? this.description,
       profileP: profileP ?? this.profileP,
+      likes: likes ?? this.likes,
     );
   }
 
@@ -30,7 +38,8 @@ class Post {
       'name': name,
       'title': title,
       'desc': description,
-      'url': profileP
+      'url': profileP,
+      'likes': likes,
     };
   }
 
@@ -38,24 +47,38 @@ class Post {
     return Post(
       id: map['_id'],
       name: map['user']['name'] as String,
+      email: map['user']['email'] as String,
       title: map['title'] as String,
       description: map['desc'] as String,
       profileP: map['user']['url'] as String,
+      likes: map['likes']['noOFLikes'] as int,
     );
+  }
+
+  List<String?>? fromDynamic(List<dynamic> list) {
+    List<String> temp = [];
+    for (var v in list) {
+      temp.add(v.toString());
+    }
+    return temp;
   }
 
   Post.fromjson(Map<String, dynamic> json) {
     id = json['_id'];
     name = json['user']['name'];
+    email = json['user']['email'];
     profileP = json['user']['url'];
     title = json['title'];
     description = json['desc'];
     time = json['createdAt'];
+    likes = json['likes']['noOFLikes'];
+    likedBy = fromDynamic(json['likes']['user']);
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['user']['name'] = name;
+    data['user']['email'] = email;
     data['user']['url'] = profileP;
     data['title'] = title;
     data['desc'] = description;

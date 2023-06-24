@@ -42,6 +42,8 @@ dependencies:
   cloud_firestore: ^4.8.1
   google_sign_in: ^6.1.4
   wave: ^0.2.2
+  webview_flutter: ^4.2.2
+  url_launcher: ^6.1.11
 
 dev_dependencies:
   flutter_test:

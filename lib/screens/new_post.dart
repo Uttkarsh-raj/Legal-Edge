@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hackman/services/apis/post_api_handler.dart';
@@ -40,15 +42,37 @@ class _NewPostPageState extends State<NewPostPage> {
         actions: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: GestureDetector(
-              onTap: () {
-                submit(
-                    user!.email.toString().trim(),
-                    titleController.text.toString(),
-                    descriptionController.text.toString());
-                Navigator.of(context).pop();
-              },
-              child: const Text('Post'),
+            child: Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    submit(
+                        'anonymous@gmail.com',
+                        titleController.text.toString(),
+                        descriptionController.text.toString());
+                    Navigator.of(context).pop();
+                  },
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        'asset/images/icons8-incognito-96.png',
+                        scale: 3,
+                      ),
+                      const SizedBox(width: 20),
+                    ],
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    submit(
+                        user!.email.toString().trim(),
+                        titleController.text.toString(),
+                        descriptionController.text.toString());
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('Post'),
+                ),
+              ],
             ),
           ),
         ],

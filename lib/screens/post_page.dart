@@ -59,7 +59,7 @@ class _IndividualPostPageState extends State<IndividualPostPage> {
           getComments();
         },
         child: SingleChildScrollView(
-          physics: AlwaysScrollableScrollPhysics(),
+          physics: const AlwaysScrollableScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(10, 8, 10, 8),
             child: Column(
@@ -73,7 +73,7 @@ class _IndividualPostPageState extends State<IndividualPostPage> {
                         child: CircleAvatar(
                           radius: 20,
                           backgroundImage: NetworkImage(
-                            AppConstantsProfile.defaultAvatar,
+                            widget.post.profileP!,
                           ),
                         ),
                       ),
@@ -177,6 +177,7 @@ class _IndividualPostPageState extends State<IndividualPostPage> {
                   child: (present)
                       ? Expanded(
                           child: ListView.builder(
+                            reverse: true,
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                             itemCount: comments.length,

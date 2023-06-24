@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:hackman/app_consts/app_colors.dart';
 import 'package:hackman/screens/posts_page.dart';
-import 'package:hackman/screens/profile_page.dart';
 import 'package:hackman/screens/search_lawyer_page.dart';
 import 'package:hackman/screens/sign_in.dart';
+import 'package:hackman/services/models/user_model.dart';
+import '../services/apis/user_api_handler.dart';
 import 'new_post.dart';
 
 class MainAuthPage extends StatelessWidget {
@@ -29,11 +30,10 @@ class MainAuthPage extends StatelessWidget {
 }
 
 final User user = FirebaseAuth.instance.currentUser!;
+UserModle? userData;
 
 final screen = [
   const PostPage(),
-  const ProfilePage(),
-  // FormPage(user: user),
   const SearchLawyerPage(),
 ];
 
@@ -79,10 +79,10 @@ class _MainPageState extends State<MainPage> {
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.message_outlined),
-            label: 'Messages',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.message_outlined),
+          //   label: 'Messages',
+          // ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search_outlined),
             label: 'Search',

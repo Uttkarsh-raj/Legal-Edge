@@ -2,9 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hackman/screens/profile_page.dart';
 import 'package:hackman/services/apis/post_api_handler.dart';
+import 'package:hackman/services/models/user_model.dart';
 import 'package:hackman/utils/posts_card.dart';
 
 import '../app_consts/app_colors.dart';
+import '../services/apis/user_api_handler.dart';
 import '../services/models/post_model.dart';
 
 class PostPage extends StatefulWidget {
@@ -16,8 +18,10 @@ class PostPage extends StatefulWidget {
 
 class _PostPageState extends State<PostPage> {
   List<Post> posts = [];
+  List<String> likedBy = [];
   bool present = false;
   String? profilPic = FirebaseAuth.instance.currentUser?.photoURL;
+  final user = FirebaseAuth.instance.currentUser;
 
   void getPosts() async {
     posts = await PostApiHandler.getPosts();
@@ -27,16 +31,22 @@ class _PostPageState extends State<PostPage> {
     });
   }
 
+  UserModle? userData;
+  void getUser(String email) async {
+    userData = await UserApiHandler.getUserByEmail(email);
+    setState(() {});
+  }
+
   @override
   void initState() {
     getPosts();
+    getUser(user!.email!);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: size.height * 0.072,
@@ -45,7 +55,9 @@ class _PostPageState extends State<PostPage> {
         leading: GestureDetector(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const ProfilePage(),
+              builder: (context) => ProfilePage(
+                userData: userData!,
+              ),
             ));
           },
           child: CircleAvatar(
@@ -79,6 +91,7 @@ class _PostPageState extends State<PostPage> {
                         itemCount: posts.length,
                         itemBuilder: (context, index) {
                           return RedditPostWidget(
+                            email: posts[index].email ?? "",
                             id: posts[index].id!,
                             profilePhoto: posts[index].profileP,
                             post: posts[index],
@@ -86,6 +99,7 @@ class _PostPageState extends State<PostPage> {
                             author: posts[index].name ?? "",
                             description: posts[index].description ?? "",
                             time: posts[index].time ?? "",
+                            likedBy: posts[index].likedBy!,
                           );
                         },
                       ),

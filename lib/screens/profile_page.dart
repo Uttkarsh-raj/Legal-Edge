@@ -4,8 +4,11 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hackman/app_consts/app_colors.dart';
 import 'package:hackman/app_consts/app_constants.dart';
 
+import '../services/models/user_model.dart';
+
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({super.key});
+  const ProfilePage({super.key, required this.userData});
+  final UserModle userData;
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -17,6 +20,7 @@ class _ProfilePageState extends State<ProfilePage> {
   void logout() async {
     await GoogleSignIn().signOut();
     await FirebaseAuth.instance.signOut();
+    setState(() {});
   }
 
   @override
@@ -48,14 +52,15 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: CircleAvatar(
                   radius: 50,
                   backgroundImage: NetworkImage(
-                    user?.photoURL ?? AppConstantsProfile.defaultAvatar,
+                    widget.userData.profilePic ??
+                        AppConstantsProfile.defaultAvatar,
                   ),
                 ),
               ),
             ),
             const SizedBox(height: 10),
             Text(
-              '${user?.displayName}',
+              '${widget.userData.name}',
               style: const TextStyle(
                 color: AppColorsConstants.tertiaryBlackColor,
                 fontSize: 16,
@@ -65,7 +70,17 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             const SizedBox(height: 5),
             Text(
-              '${user?.email}',
+              '${widget.userData.email}',
+              style: TextStyle(
+                color: AppColorsConstants.tertiaryBlackColor.withOpacity(0.7),
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                letterSpacing: 0.05,
+              ),
+            ),
+            const SizedBox(height: 5),
+            Text(
+              '${widget.userData.contact}',
               style: TextStyle(
                 color: AppColorsConstants.tertiaryBlackColor.withOpacity(0.7),
                 fontSize: 14,

@@ -17,6 +17,9 @@ class _SearchLawyerPageState extends State<SearchLawyerPage> {
   TextEditingController searchController = TextEditingController();
   List<Lawyer> lawyers = [];
   bool present = false;
+  bool city = false;
+  bool courts = false;
+  bool cases = false;
 
   @override
   void dispose() {
@@ -89,6 +92,40 @@ class _SearchLawyerPageState extends State<SearchLawyerPage> {
                         AppColorsConstants.tertiaryBlackColor.withOpacity(0.7),
                   ),
                 ),
+              ],
+            ),
+            const SizedBox(height: 5),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                const Text('Filter by:'),
+                Checkbox(
+                  value: city,
+                  onChanged: (value) {
+                    setState(() {
+                      city = !city;
+                    });
+                  },
+                ),
+                const Text('City'),
+                Checkbox(
+                  value: courts,
+                  onChanged: (value) {
+                    setState(() {
+                      courts = !courts;
+                    });
+                  },
+                ),
+                const Text('Cases'),
+                Checkbox(
+                  value: cases,
+                  onChanged: (value) {
+                    setState(() {
+                      cases = !cases;
+                    });
+                  },
+                ),
+                const Text('Courts'),
               ],
             ),
             const SizedBox(height: 10),

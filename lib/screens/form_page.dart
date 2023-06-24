@@ -22,6 +22,7 @@ class _FormPageState extends State<FormPage> {
   TextEditingController addressController = TextEditingController();
   TextEditingController regNoController = TextEditingController();
   TextEditingController descController = TextEditingController();
+  TextEditingController calendlyLinkController = TextEditingController();
   bool isChecked = false;
   List<String> cases = [];
   List<String> courts = [];
@@ -37,6 +38,7 @@ class _FormPageState extends State<FormPage> {
   @override
   void dispose() {
     nameController.dispose();
+    calendlyLinkController.dispose();
     emailController.dispose();
     addressController.dispose();
     contactController.dispose();
@@ -95,6 +97,7 @@ class _FormPageState extends State<FormPage> {
                     descController.text.isNotEmpty) {
                   LawyerApiHandler.registerLawyer(
                     user.photoURL.toString().trim(),
+                    calendlyLinkController.text.toString().trim(),
                     nameController.text.toString().trim(),
                     emailController.text.toString().trim(),
                     addressController.text.toString().trim(),
@@ -220,6 +223,50 @@ class _FormPageState extends State<FormPage> {
                                   : null,
                               hintStyle: const TextStyle(
                                   color: Colors.grey, fontSize: 14),
+                              border: InputBorder.none,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              const SizedBox(height: 13),
+              if (isChecked)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      'Discription: ',
+                      style: TextStyle(
+                        color: AppColorsConstants.tertiaryBlackColor,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    Container(
+                      height: size.height * 0.1,
+                      width: size.width * 0.68,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1.4,
+                          color: AppColorsConstants.tertiaryBlackColor
+                              .withOpacity(0.6),
+                        ),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
+                          child: TextField(
+                            maxLines: 50,
+                            controller: calendlyLinkController,
+                            decoration: const InputDecoration(
+                              hintText: 'Calendly Link:',
+                              hintStyle: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 14,
+                              ),
                               border: InputBorder.none,
                             ),
                           ),

@@ -1,24 +1,24 @@
-class User {
+class UserModle {
   String? name;
   String? uid;
   String? profilePic;
   String? email;
   String? contact;
-  User({
+  UserModle({
     this.name,
     this.profilePic,
     this.email,
     this.contact,
   });
 
-  User copyWith({
+  UserModle copyWith({
     String? name,
     String? uid,
     String? profilePic,
     String? email,
     String? contact,
   }) {
-    return User(
+    return UserModle(
       name: name ?? this.name,
       profilePic: profilePic ?? this.profilePic,
       email: email ?? this.email,
@@ -36,11 +36,11 @@ class User {
     };
   }
 
-  User.fromjson(Map<String, dynamic> json) {
+  UserModle.fromjson(Map<String, dynamic> json) {
     uid = json['_id'];
     name = json['name'];
     email = json['email'];
-    profilePic = json['avatar']['url'];
+    profilePic = json['url'];
     contact = json['contact'];
   }
 
@@ -48,23 +48,23 @@ class User {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['name'] = name;
     data['email'] = email;
-    data['avatar']['url'] = profilePic;
+    data['url'] = profilePic;
     data['contact'] = contact;
     return data;
   }
 
-  static List<User> usersFromSnapshot(List users) {
+  static List<UserModle> usersFromSnapshot(List users) {
     return users.map((data) {
-      return User.fromjson(data);
+      return UserModle.fromjson(data);
     }).toList();
   }
 
-  static User userfromSnapshot(dynamic json) {
-    return User.fromjson(json);
+  static UserModle userfromSnapshot(dynamic json) {
+    return UserModle.fromjson(json);
   }
 
-  factory User.fromMap(Map<String, dynamic> map) {
-    return User(
+  factory UserModle.fromMap(Map<String, dynamic> map) {
+    return UserModle(
       name: map['name'] != null ? map['name'] as String : null,
       profilePic:
           map['profilePic'] != null ? map['profilePic'] as String : null,
@@ -83,7 +83,7 @@ class User {
   }
 
   @override
-  bool operator ==(covariant User other) {
+  bool operator ==(covariant UserModle other) {
     if (identical(this, other)) return true;
 
     return other.name == name &&

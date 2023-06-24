@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hackman/screens/book_an_appointment.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 import '../app_consts/app_colors.dart';
 import '../app_consts/app_constants.dart';
@@ -268,7 +271,47 @@ class _LawyersProfileState extends State<LawyersProfile> {
                   ),
                 ),
               ),
-            )
+            ),
+            SizedBox(height: size.height * 0.03),
+            GestureDetector(
+              onTap: () async {
+                String? url = widget.lawyer.calendlylink;
+                if (await canLaunchUrl(Uri.parse(url!))) {
+                  await launchUrl(Uri.parse(url));
+                } else {
+                  throw 'Could not launch $url';
+                }
+              },
+              child: Container(
+                height: size.height * 0.063,
+                width: size.width * 0.6,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(17),
+                  color:
+                      AppColorsConstants.secondaryPurpleColor.withOpacity(0.3),
+                ),
+                child: const Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.book),
+                      SizedBox(
+                        width: 7,
+                      ),
+                      Text(
+                        'Request an Appointment',
+                        style: TextStyle(
+                          color: AppColorsConstants.tertiaryBlackColor,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 0.05,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

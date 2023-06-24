@@ -12,6 +12,7 @@ class Lawyer {
   List<String?>? courts;
   String? contact;
   String? discription;
+  String? calendlylink;
   Lawyer({
     this.profilePic,
     this.name,
@@ -23,6 +24,7 @@ class Lawyer {
     this.courts,
     this.contact,
     this.discription,
+    this.calendlylink,
   });
 
   Lawyer copyWith({
@@ -96,6 +98,7 @@ class Lawyer {
     cases = List<String>.from(json['cases']);
     courts = List<String>.from(json['courts']);
     discription = json['desc'];
+    calendlylink = json['calendly'];
   }
 
   Map<String, dynamic> toJson() {
@@ -110,6 +113,7 @@ class Lawyer {
     data['cases'] = json.encode(cases);
     data['courts'] = json.encode(courts);
     data['desc'] = discription;
+    data['calendly'] = calendlylink;
     return data;
   }
 

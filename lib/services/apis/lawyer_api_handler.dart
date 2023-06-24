@@ -70,6 +70,7 @@ class LawyerApiHandler {
 
   static Future registerLawyer(
     String? profilePic,
+    String? calendlyLink,
     String? name,
     String? email,
     String? address,
@@ -98,6 +99,7 @@ class LawyerApiHandler {
           "courts": courts,
           "contact": contact,
           "desc": discription,
+          "calendly": calendlyLink,
         },
       ),
     );
