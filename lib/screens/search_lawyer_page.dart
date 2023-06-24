@@ -97,7 +97,6 @@ class _SearchLawyerPageState extends State<SearchLawyerPage> {
                     child: ListView.builder(
                       itemCount: lawyers.length,
                       itemBuilder: (context, index) {
-                        print(lawyers[index]);
                         return CustomListTile(
                           lawyer: lawyers[index],
                           title: lawyers[index].name!,

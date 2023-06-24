@@ -1,5 +1,6 @@
 class Post {
   String? name;
+  String? id;
   String? title;
   String? description;
   String? time;
@@ -9,6 +10,7 @@ class Post {
     required this.title,
     required this.description,
     required this.profileP,
+    this.id,
   });
   Post copyWith({
     String? email,
@@ -34,6 +36,7 @@ class Post {
 
   factory Post.fromMap(Map<String, dynamic> map) {
     return Post(
+      id: map['_id'],
       name: map['user']['name'] as String,
       title: map['title'] as String,
       description: map['desc'] as String,
@@ -42,6 +45,7 @@ class Post {
   }
 
   Post.fromjson(Map<String, dynamic> json) {
+    id = json['_id'];
     name = json['user']['name'];
     profileP = json['user']['url'];
     title = json['title'];

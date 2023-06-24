@@ -79,6 +79,7 @@ class _PostPageState extends State<PostPage> {
                         itemCount: posts.length,
                         itemBuilder: (context, index) {
                           return RedditPostWidget(
+                            id: posts[index].id!,
                             profilePhoto: posts[index].profileP,
                             post: posts[index],
                             title: posts[index].title ?? "",

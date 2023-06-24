@@ -7,6 +7,7 @@ import '../services/models/post_model.dart';
 
 class RedditPostWidget extends StatelessWidget {
   final Post post;
+  final String id;
   final String title;
   final String author;
   final String description;
@@ -21,6 +22,7 @@ class RedditPostWidget extends StatelessWidget {
     required this.time,
     required this.post,
     required this.profilePhoto,
+    required this.id,
   });
 
   @override
@@ -33,6 +35,7 @@ class RedditPostWidget extends StatelessWidget {
             MaterialPageRoute(
               builder: (context) => IndividualPostPage(
                 post: post,
+                id: id,
               ),
             ),
           );
