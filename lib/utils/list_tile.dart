@@ -88,13 +88,13 @@ class _CustomListTileState extends State<CustomListTile> {
                 ),
               ),
               const SizedBox(height: 8),
-              if (widget.lawyer.cases!.isNotEmpty)
+              if (widget.lawyer.courts!.isNotEmpty)
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
                     padding: EdgeInsets.only(left: 5.0),
                     child: Text(
-                      'Cases at:',
+                      'Courts :',
                       style: TextStyle(
                         fontSize: 13.0,
                         fontWeight: FontWeight.w400,
@@ -109,7 +109,7 @@ class _CustomListTileState extends State<CustomListTile> {
                 // color: Colors.red,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: widget.lawyer.cases!.length,
+                  itemCount: widget.lawyer.courts!.length,
                   itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.all(5),

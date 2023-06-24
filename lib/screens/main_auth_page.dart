@@ -2,12 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:hackman/app_consts/app_colors.dart';
+import 'package:hackman/screens/onboarding/onboard.dart';
 import 'package:hackman/screens/posts_page.dart';
 import 'package:hackman/screens/search_lawyer_page.dart';
 import 'package:hackman/screens/sign_in.dart';
 import 'package:hackman/services/models/user_model.dart';
-import '../services/apis/user_api_handler.dart';
 import 'new_post.dart';
+import 'onboarding/onboarding_first.dart';
 
 class MainAuthPage extends StatelessWidget {
   const MainAuthPage({Key? key}) : super(key: key);
@@ -21,7 +22,7 @@ class MainAuthPage extends StatelessWidget {
           if (snapshot.hasData) {
             return const MainPage();
           } else {
-            return const SignInPage();
+            return const OnBoarding();
           }
         },
       ),

@@ -68,6 +68,68 @@ class LawyerApiHandler {
     }
   }
 
+  static Future<List<Lawyer>> searchLawyersByCity(String search) async {
+    try {
+      var uri = Uri.https(
+          'hkmn-dev-new.onrender.com', '/api/v1/lawyers', {'city': search});
+      // var uri = Uri.parse('http://172.25.6.77:5000/api/v1/lawyers');
+      var res = await http.get(uri);
+      var data = jsonDecode(res.body);
+      List temp = [];
+      if (res.statusCode != 200) {
+        throw data["message"];
+      }
+      for (var v in data['lawyers']) {
+        temp.add(v);
+      }
+      return Lawyer.lawyersFromSnapshot(temp);
+    } catch (e) {
+      log("An error occured $e.");
+      throw e.toString();
+    }
+  }
+
+  static Future<List<Lawyer>> searchLawyersByCases(String search) async {
+    try {
+      var uri = Uri.https(
+          'hkmn-dev-new.onrender.com', '/api/v1/lawyers', {'cases': search});
+      // var uri = Uri.parse('http://172.25.6.77:5000/api/v1/lawyers');
+      var res = await http.get(uri);
+      var data = jsonDecode(res.body);
+      List temp = [];
+      if (res.statusCode != 200) {
+        throw data["message"];
+      }
+      for (var v in data['lawyers']) {
+        temp.add(v);
+      }
+      return Lawyer.lawyersFromSnapshot(temp);
+    } catch (e) {
+      log("An error occured $e.");
+      throw e.toString();
+    }
+  }
+
+  static Future<List<Lawyer>> searchLawyersByCourt(String court) async {
+    try {
+      var uri = Uri.https(
+          'hkmn-dev-new.onrender.com', '/api/v1/lawyers', {'courts': court});
+      var res = await http.get(uri);
+      var data = jsonDecode(res.body);
+      List temp = [];
+      if (res.statusCode != 200) {
+        throw data["message"];
+      }
+      for (var v in data['lawyers']) {
+        temp.add(v);
+      }
+      return Lawyer.lawyersFromSnapshot(temp);
+    } catch (e) {
+      log("An error occured $e.");
+      throw e.toString();
+    }
+  }
+
   static Future registerLawyer(
     String? profilePic,
     String? calendlyLink,

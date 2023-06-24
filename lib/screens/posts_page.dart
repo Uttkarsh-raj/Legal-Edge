@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hackman/screens/profile_page.dart';
 import 'package:hackman/services/apis/post_api_handler.dart';
 import 'package:hackman/services/models/user_model.dart';
@@ -21,7 +22,7 @@ class _PostPageState extends State<PostPage> {
   List<String> likedBy = [];
   bool present = false;
   String? profilPic = FirebaseAuth.instance.currentUser?.photoURL;
-  final user = FirebaseAuth.instance.currentUser;
+  final User user = FirebaseAuth.instance.currentUser!;
 
   void getPosts() async {
     posts = await PostApiHandler.getPosts();
@@ -37,10 +38,17 @@ class _PostPageState extends State<PostPage> {
     setState(() {});
   }
 
+  void logout() async {
+    await GoogleSignIn().signOut();
+    await FirebaseAuth.instance.signOut();
+    setState(() {});
+  }
+
   @override
   void initState() {
     getPosts();
-    getUser(user!.email!);
+    print(user.email);
+    getUser(user.email!);
     super.initState();
   }
 
@@ -67,6 +75,15 @@ class _PostPageState extends State<PostPage> {
             ),
           ),
         ),
+        actions: [
+          GestureDetector(
+            onTap: logout,
+            child: const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(Icons.exit_to_app_outlined),
+            ),
+          ),
+        ],
         centerTitle: true,
         title: const Text(
           'LegalEdge',

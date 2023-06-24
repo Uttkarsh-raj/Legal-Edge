@@ -38,7 +38,43 @@ class _SearchLawyerPageState extends State<SearchLawyerPage> {
     setState(() {
       lawyers.clear();
     });
-    if (search.isNotEmpty) {
+    if (cases && search.isNotEmpty) {
+      lawyers = await LawyerApiHandler.searchLawyersByCases(search);
+      print(lawyers);
+      setState(() {
+        if (lawyers.isNotEmpty) {
+          present = true;
+        } else {
+          present = false;
+        }
+      });
+    } else if (courts && search.isNotEmpty) {
+      lawyers = await LawyerApiHandler.searchLawyersByCourt(search);
+      print(lawyers);
+      setState(() {
+        if (lawyers.isNotEmpty) {
+          present = true;
+        } else {
+          present = false;
+        }
+      });
+    } else if (city && search.isNotEmpty) {
+      lawyers = await LawyerApiHandler.searchLawyersByCity(search);
+      print(lawyers);
+      setState(() {
+        if (lawyers.isNotEmpty) {
+          present = true;
+        } else {
+          present = false;
+        }
+      });
+    } else if (cases && search.isNotEmpty) {
+      lawyers = await LawyerApiHandler.searchLawyersByCases(search);
+      print(lawyers);
+      setState(() {
+        if (lawyers.isNotEmpty) present = true;
+      });
+    } else if (search.isNotEmpty) {
       lawyers = await LawyerApiHandler.searchLawyers(search);
       setState(() {
         if (lawyers.isNotEmpty) present = true;
@@ -103,25 +139,31 @@ class _SearchLawyerPageState extends State<SearchLawyerPage> {
                   value: city,
                   onChanged: (value) {
                     setState(() {
+                      courts = false;
+                      cases = false;
                       city = !city;
                     });
                   },
                 ),
                 const Text('City'),
                 Checkbox(
-                  value: courts,
+                  value: cases,
                   onChanged: (value) {
                     setState(() {
-                      courts = !courts;
+                      city = false;
+                      cases = !cases;
+                      courts = false;
                     });
                   },
                 ),
                 const Text('Cases'),
                 Checkbox(
-                  value: cases,
+                  value: courts,
                   onChanged: (value) {
                     setState(() {
-                      cases = !cases;
+                      courts = !courts;
+                      city = false;
+                      cases = false;
                     });
                   },
                 ),
@@ -145,7 +187,7 @@ class _SearchLawyerPageState extends State<SearchLawyerPage> {
                     ),
                   )
                 : const Center(
-                    child: CircularProgressIndicator(),
+                    child: Text('No data found'),
                   ),
           ],
         ),
