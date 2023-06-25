@@ -16,6 +16,7 @@ class CommentApiHandler {
       }
       for (var v in data['post']['comment']) {
         temp.add(v);
+        print(v);
       }
       return temp;
     } catch (e) {
@@ -26,6 +27,7 @@ class CommentApiHandler {
 
   static Future<List<Comment>> getComments(String id) async {
     List temp = await getCommentData(id);
+    print('temp: $temp');
     print(temp);
     return Comment.commentFromSnapshot(temp);
   }

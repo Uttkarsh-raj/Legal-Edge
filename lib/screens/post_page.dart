@@ -166,7 +166,7 @@ class _IndividualPostPageState extends State<IndividualPostPage> {
                     GestureDetector(
                       onTap: () {
                         addComment(user!.email!);
-                        comment.clear();
+                        // comment.clear();
                       },
                       child: const Icon(Icons.send),
                     ),

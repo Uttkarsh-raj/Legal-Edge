@@ -52,8 +52,10 @@ class Comment {
 
   Comment.fromJson(Map<String, dynamic> json) {
     postId = json['_id'];
-    userName = json['user']['name'];
-    profilePic = json['user']['url'];
+    userName =
+        (json['user'] != null) ? json['user']['name'] : json['lawyer']['name'];
+    profilePic =
+        (json['user'] != null) ? json['user']['url'] : json['lawyer']['url'];
     comment = json['commentDesc'];
     time = json['createdAt'];
     isLawyer = json['isLawyer'];
