@@ -105,6 +105,7 @@ class _PostPageState extends State<PostPage> {
                   children: [
                     Expanded(
                       child: ListView.builder(
+                        reverse: true,
                         itemCount: posts.length,
                         itemBuilder: (context, index) {
                           return RedditPostWidget(

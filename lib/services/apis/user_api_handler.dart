@@ -44,6 +44,11 @@ class UserApiHandler {
     return UserModle.userfromSnapshot(userData);
   }
 
+  static Future<UserModle> getAllUsers() async {
+    var userData = getUserData();
+    return UserModle.userfromSnapshot(userData);
+  }
+
   static Future<UserModle> getUserByEmail(String email) async {
     try {
       var uri = Uri.parse(
@@ -81,6 +86,7 @@ class UserApiHandler {
 
   static Future registerUser(
       String name, String email, String number, String profilePicUrl) async {
+    print('register');
     await http.post(
       Uri.parse('https://hkmn-dev-new.onrender.com/api/v1/user/register'),
       // Uri.parse('http://172.25.6.77:5000/api/V1/user/register'),

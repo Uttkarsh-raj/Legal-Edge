@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:hackman/app_consts/app_colors.dart';
+import 'package:hackman/screens/messages.dart';
 import 'package:hackman/screens/onboarding/onboard.dart';
 import 'package:hackman/screens/posts_page.dart';
 import 'package:hackman/screens/search_lawyer_page.dart';
@@ -35,6 +36,7 @@ UserModle? userData;
 
 final screen = [
   const PostPage(),
+  const MessagesPage(),
   const SearchLawyerPage(),
 ];
 
@@ -80,10 +82,10 @@ class _MainPageState extends State<MainPage> {
             icon: Icon(Icons.home),
             label: 'Home',
           ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(Icons.message_outlined),
-          //   label: 'Messages',
-          // ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.message_outlined),
+            label: 'Messages',
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search_outlined),
             label: 'Search',

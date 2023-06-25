@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hackman/services/apis/lawyer_api_handler.dart';
+import 'package:hackman/services/apis/user_api_handler.dart';
 import 'package:hackman/services/models/lawyer_model.dart';
 import 'package:hackman/utils/input_field.dart';
 
@@ -16,6 +17,7 @@ class SearchLawyerPage extends StatefulWidget {
 class _SearchLawyerPageState extends State<SearchLawyerPage> {
   TextEditingController searchController = TextEditingController();
   List<Lawyer> lawyers = [];
+  List<Lawyer> users = [];
   bool present = false;
   bool city = false;
   bool courts = false;
@@ -29,6 +31,13 @@ class _SearchLawyerPageState extends State<SearchLawyerPage> {
 
   void getLawyers() async {
     lawyers = await LawyerApiHandler.getLawyers();
+    setState(() {
+      if (lawyers.isNotEmpty) present = true;
+    });
+  }
+
+  void getUsers() async {
+    users = await UserApiHandler.getUser(null);
     setState(() {
       if (lawyers.isNotEmpty) present = true;
     });

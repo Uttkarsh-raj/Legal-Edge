@@ -69,9 +69,9 @@ class _FormPageState extends State<FormPage> {
                   emailController.text.isNotEmpty &&
                   contactController.text.isNotEmpty &&
                   cityController.text.isNotEmpty &&
-                  addressController.text.isNotEmpty &&
-                  descController.text.isNotEmpty) {
+                  addressController.text.isNotEmpty) {
                 if (!isChecked) {
+                  print('register');
                   UserApiHandler.registerUser(
                     nameController.text.toString().trim(),
                     emailController.text.toString().trim(),
@@ -237,7 +237,7 @@ class _FormPageState extends State<FormPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
-                      'Discription: ',
+                      'Calendly Link: ',
                       style: TextStyle(
                         color: AppColorsConstants.tertiaryBlackColor,
                         fontSize: 16,
@@ -246,7 +246,7 @@ class _FormPageState extends State<FormPage> {
                     ),
                     Container(
                       height: size.height * 0.1,
-                      width: size.width * 0.68,
+                      width: size.width * 0.6,
                       decoration: BoxDecoration(
                         border: Border.all(
                           width: 1.4,
@@ -259,10 +259,10 @@ class _FormPageState extends State<FormPage> {
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(15, 0, 0, 0),
                           child: TextField(
-                            maxLines: 50,
+                            maxLines: 10,
                             controller: calendlyLinkController,
                             decoration: const InputDecoration(
-                              hintText: 'Calendly Link:',
+                              hintText: 'Calendly Link',
                               hintStyle: TextStyle(
                                 color: Colors.grey,
                                 fontSize: 14,

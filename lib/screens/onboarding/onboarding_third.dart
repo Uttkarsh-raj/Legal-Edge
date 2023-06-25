@@ -14,6 +14,7 @@ class OnboardinngThird extends StatelessWidget {
       backgroundColor:
           AppColorsConstants.primaryBackgroundColor.withOpacity(0.5),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -26,12 +27,15 @@ class OnboardinngThird extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(8.0, 3, 8, 3),
-            child: Text(
-              'Interactive and Intutive interface',
-              style: TextStyle(
-                color: AppColorsConstants.secondaryPurpleColor.withOpacity(0.7),
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
+            child: Center(
+              child: Text(
+                'Efficient Appointment Booking',
+                style: TextStyle(
+                  color:
+                      AppColorsConstants.secondaryPurpleColor.withOpacity(0.7),
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                ),
               ),
             ),
           ),
