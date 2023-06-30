@@ -120,7 +120,7 @@ flutter pub get
 ##### Setup backend
 Setup the repo in your local system
 ```
-git clone https://github.com/hackman-v6/201CreatedChaos
+git clone https://github.com/Uttkarsh-raj/Legal-Edge.git
 ```
 Install the dependencies and start the server
 ```
