@@ -106,7 +106,7 @@ Below is an example of how you can instruct your audience on installing and sett
 
 1.Clone the repo 
 
-git clone https://github.com/your_username_/Project-Name.git
+git clone https://github.com/Uttkarsh-raj/Legal-Edge
 
 
 2.Install the packages 
